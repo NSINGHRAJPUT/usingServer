@@ -39,6 +39,38 @@ function addItem(e){
        .then(res => console.log(res))
        .catch(err => console.log(err))
 }
+window.addEventListener('DOMContentLoaded', ()=> {
+  axios.get('https://crudcrud.com/api/11db9ab287d847c9ab86a017db3eebcb/bookappointment')
+       .then((res) => {
+        for(var i=0;i<res.data.length;i++){
+          showUseronScreen(res.data[i])
+        }
+       })
+})
+function showUseronScreen(obj){
+  let newItem= obj.name;
+  let newItem1=obj.email;
+  let newItem2=obj.number;
+  var li = document.createElement('li');
+  li.className = 'list-group-item';
+  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(" "));
+  li.appendChild(document.createTextNode(newItem1));
+  li.appendChild(document.createTextNode(" "));
+  li.appendChild(document.createTextNode(newItem2));
+  li.appendChild(document.createTextNode(" "));
+  var deleteBtn = document.createElement('button');
+  var editBtn = document.createElement('button');
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  editBtn.className = 'btn btn-warning btn-sm edit';
+  deleteBtn.appendChild(document.createTextNode('Delete'));
+  editBtn.appendChild(document.createTextNode('Edit'))
+  li.appendChild(deleteBtn);
+  li.appendChild(editBtn);
+  itemList.appendChild(li);
+}
+
+
 // Remove item
 function removeItem(e){
   if(e.target.classList.contains('delete')){
