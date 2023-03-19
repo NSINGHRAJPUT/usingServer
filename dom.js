@@ -35,15 +35,19 @@ function addItem(e){
     email:`${newItem1}`,
     number:`${newItem2}`
   }
-  axios.post('https://crudcrud.com/api/11db9ab287d847c9ab86a017db3eebcb/bookappointment', myobj)
+  axios.post('https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment', myobj)
        .then(res => console.log(res))
        .catch(err => console.log(err))
 }
 window.addEventListener('DOMContentLoaded', ()=> {
-  axios.get('https://crudcrud.com/api/11db9ab287d847c9ab86a017db3eebcb/bookappointment')
+  axios.get('https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment')
        .then((res) => {
         for(var i=0;i<res.data.length;i++){
           showUseronScreen(res.data[i])
+          let obj=JSON.stringify(res.data[i])
+          let myobj=JSON.parse(obj)
+          localStorage.setItem(myobj.number,obj)
+          console.log(myobj)
         }
        })
 })
@@ -75,22 +79,41 @@ function showUseronScreen(obj){
 function removeItem(e){
   if(e.target.classList.contains('delete')){
     if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
-    }
+    let x=e.target.parentElement.textContent
+        var num = `${x}`.match(/\d+/g);
+        let obj = localStorage.getItem(`${num[0]}`)
+        if(obj==undefined){
+          obj=localStorage.getItem(`${num[1]}`)
+        }
+        obj=JSON.parse(obj)
+        let id=obj._id;
+        axios.delete(`https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment/${id}`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+        localStorage.removeItem(num[0]);
+        var li=e.target.parentElement;
+        itemList.removeChild(li);
+      }
   }
 }
+
 function editItem(e){
     if(e.target.classList.contains('edit')){
         let x=e.target.parentElement.textContent
-        console.log(x)
         var num = `${x}`.match(/\d+/g);
-        let obj = JSON.parse(localStorage.getItem(`${num[1]}`))
-        console.log(obj.name)
+        let obj = localStorage.getItem(`${num[0]}`)
+        if(obj==undefined){
+          obj=localStorage.getItem(`${num[1]}`)
+        }
+        obj=JSON.parse(obj)
+        let id=obj._id;
         document.getElementById('name').value=obj.name;
         document.getElementById('email').value = obj.email;
         document.getElementById('number').value =obj.number;
-        localStorage.removeItem(num[1]);
+        axios.delete(`https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment/${id}`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+        localStorage.removeItem(num[0]);
         var li=e.target.parentElement;
         itemList.removeChild(li);
     }
