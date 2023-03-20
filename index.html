@@ -10,19 +10,28 @@
 <body> 
       <div class="container">
        <div id="main" class="card card-body">
-        <h2 class="title">Book Appointment</h2>
         <form id="addForm" class="form-inline mb-3">
-            <label for="Name">Name</label>
-                <input type="text" class="form-control mr-2" id="name" name="name">
-            <label for="email">Email</label>
-                <input type="email" class="form-control mr-2" id="email" name="email">
-            <label for="number">Number</label>
-                <input type="number" class="form-control mr-2" id="number" name="number">
-          <input type="submit" class="btn btn-dark" value="Submit">
+            <label for="price">Selling Price</label>
+                <input type="number" class="form-control mr-2" id="price" name="price">
+            <label for="PName">Product Name</label>
+                <input type="text" class="form-control mr-2" id="pname" name="Pname">
+            <label for="category">Choose a category</label>
+            <select id="category" name="category">
+              <option value="Electronic Items">Electronic Items</option>
+              <option value="Food Items">Food Items</option>
+              <option value="SkinCare Items">SkinCare Items</option>
+            </select><br>
+          <input type="submit" class="btn btn-dark" value="Add Product">
         </form>
-        <h2 class="title">Users</h2>
-        <ul id="items" class="list-group">
-          
+        <h1 class="title">Products</h1>
+        <h4>Electronic items</h4>
+        <ul id="eitems" class="list-group">
+        </ul>
+        <h4 class="title">Food Items</h4>
+        <ul id="fitems" class="list-group">
+        </ul>
+        <h4 class="title">Skincar Items</h4>
+        <ul id="sitems" class="list-group">
         </ul>
        </div>
       </div>
