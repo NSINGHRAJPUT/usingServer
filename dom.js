@@ -42,12 +42,12 @@ function addItem(e){
     pname:`${newItem2}`
   }
   console.log(myobj)
-  axios.post('https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment', myobj)
+  axios.post('https://crudcrud.com/api/b85afd3379b14cd3ba15bc7602758798/bookappointment', myobj)
        .then(res => console.log(res))
        .catch(err => console.log(err))
 }
 window.addEventListener('DOMContentLoaded', ()=> {
-  axios.get('https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment')
+  axios.get('https://crudcrud.com/api/b85afd3379b14cd3ba15bc7602758798/bookappointment')
        .then((res) => {
         for(var i=0;i<res.data.length;i++){
           showUseronScreen(res.data[i])
@@ -97,7 +97,7 @@ function removeItem(e){
         }
         obj=JSON.parse(obj)
         let id=obj._id;
-        axios.delete(`https://crudcrud.com/api/42e0cd4e9f75460b89d124df4690b29e/bookappointment/${id}`)
+        axios.delete(`https://crudcrud.com/api/b85afd3379b14cd3ba15bc7602758798/bookappointment/${id}`)
         .then(res => console.log(res))
         .catch(err => console.log(err));
         localStorage.removeItem(num[0]);
